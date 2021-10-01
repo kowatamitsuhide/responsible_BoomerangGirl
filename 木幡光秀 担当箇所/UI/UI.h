@@ -32,11 +32,13 @@ private:
 	SOUND start,end;
 
 	const float time_over = 0.9f;
+	const int   max_count = 3;
+
 	bool  time_over_flag = false;
 	bool  test_flag = false;
 	bool  next_scene_flag = false;
-	int   sprite_alpha = MIN_ALPHA;
-	int   count        = MIN_COUNT;
+	int   sprite_alpha = 0;
+	int   count        = 0;
 	int   sound_state  = SE_START;
 
 	/**
@@ -49,7 +51,7 @@ private:
     * @enum Alpha
     * 画像のアルファ値変更用
     */
-	enum Alpha { MIN_ALPHA  =  0, ALPHA_NUM  =   2, MAX_ALPHA = 255 };
+	enum Alpha { ALPHA_NUM  =   2, MAX_ALPHA = 255 };
 
 	/**
     * @enum Time
@@ -57,10 +59,5 @@ private:
     */
 	enum Time  { START      = 60, HARF       =  30, END       = 10  };
 
-	/**
-    * @enum Count
-    * 画像点滅の点滅回数カウント
-    */
-	enum Count { MIN_COUNT  =  0, MAX_COUNT  =   3 };
 protected:
 };

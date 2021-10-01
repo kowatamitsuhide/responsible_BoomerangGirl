@@ -59,8 +59,6 @@ private:
      * “G‚ğ“|‚µ‚½”‚ÅHP‚ğ‘‚â‚·
      */
     enum Dist_Enemy {
-        //!Š„‚Á‚½”‚Ì—]‚è
-        REMAINDER = 0,
         //!Š„‚é”
         DIST_ENEMY_NUM = 10
     };
@@ -97,8 +95,9 @@ private:
 
     bool  damage_flag = false;
 
-    const float time_over      = 0.9f;
-    const float collision_size = 0.8f;
+    const float time_over       = 0.9f;
+    const float collision_size  = 0.8f;
+    const float direction_ajust = 90.0f;
 
     float damage_frame = 0.0f;
 };

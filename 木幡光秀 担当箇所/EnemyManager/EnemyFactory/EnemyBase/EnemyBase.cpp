@@ -55,7 +55,7 @@ void EnemyBase::Draw() {
 }
 
 int EnemyBase::PlusHp() {
-	if (SceneManager::Instance().GetDeathEnemy() % DIST_ENEMY_NUM == REMAINDER)
+	if (SceneManager::Instance().GetDeathEnemy() % DIST_ENEMY_NUM == 0)
 		_hp++;
 
 	return _hp;

@@ -29,10 +29,10 @@ int UI::Update() {
 	Sound();
 
 	if (SceneFlag()) {
-		return 1;
+		return true;
 	}
 
-	return 0;
+	return false;
 }
 
 /**
@@ -45,7 +45,7 @@ void UI::Sound() {
 	//!ゲーム開始SE
 	auto start_se = !TimeManager::Instance().StartFlag();
 	//!ゲーム終了SE
-	auto end_se   = TimeManager::Instance().GetTimeLeft() < time_over && sprite_alpha < MAX_ALPHA && count < MAX_COUNT;
+	auto end_se   = TimeManager::Instance().GetTimeLeft() < time_over && sprite_alpha < MAX_ALPHA && count < max_count;
 
 	if (start_se && sound_state == SE_START) {
 		start->Play();
@@ -66,7 +66,7 @@ void UI::Sound() {
 bool UI::SceneFlag() {
 	//!スタートしていて時間が 制限時間 より大きい場合　または 制限時間で終了時処理が終わった時
 	auto flag = TimeManager::Instance().StartFlag() && TimeManager::Instance().GetTimeLeft() > time_over ||
-			    TimeManager::Instance().GetTimeLeft() < time_over && sprite_alpha < MAX_ALPHA&& count >= MAX_COUNT;
+			    TimeManager::Instance().GetTimeLeft() < time_over && sprite_alpha < MAX_ALPHA&& count >= max_count;
 
 	if (flag)return true;
 
@@ -81,8 +81,8 @@ bool UI::SceneFlag() {
 
 int  UI::SpriteAlpha() {
 	//!ゲーム開始前処理 または ゲーム終了時処理
-	auto start_sprite_alpha = !TimeManager::Instance().StartFlag()                && sprite_alpha < MAX_ALPHA && count < MAX_COUNT ||
-		                       TimeManager::Instance().GetTimeLeft() < time_over  && sprite_alpha < MAX_ALPHA && count < MAX_COUNT;
+	auto start_sprite_alpha = !TimeManager::Instance().StartFlag()                && sprite_alpha < MAX_ALPHA && count < max_count ||
+		                       TimeManager::Instance().GetTimeLeft() < time_over  && sprite_alpha < MAX_ALPHA && count < max_count;
 
 	//!ゲーム中の場合
 	auto between_game       = TimeManager::Instance().StartFlag() && TimeManager::Instance().GetTimeLeft() > time_over;
@@ -92,12 +92,12 @@ int  UI::SpriteAlpha() {
 	if (start_sprite_alpha)
 		sprite_alpha += ALPHA_NUM;
 	else if (over_sprite_alpha) {
-		sprite_alpha = MIN_ALPHA;
+		sprite_alpha = 0;
 		count++;
 	}
 	else if (between_game) {
-		count = MIN_COUNT;
-		sprite_alpha = MIN_ALPHA;
+		count = 0;
+		sprite_alpha = 0;
 	}
 
 	return sprite_alpha;
